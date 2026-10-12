@@ -2010,7 +2010,8 @@ $("#menuPop").addEventListener("click", (e) => {
   if (m === "arrange") { change(() => { if (S.pos) delete S.pos[lens]; }); if (seeds[lens]) seeds[lens].clear(); layoutVersion++; relayout({ fit: true }); }
   if (m === "export") {
     const blob = new Blob([JSON.stringify(S, null, 2)], { type: "application/json" });
-    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "notizen.json"; a.click();
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); const d = new Date(), p2 = n => String(n).padStart(2, "0");
+    a.download = `${p2(d.getFullYear() % 100)}${p2(d.getMonth() + 1)}${p2(d.getDate())}_Verantwortungsplaner.json`; a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }
   if (m === "import") $("#file").click();
